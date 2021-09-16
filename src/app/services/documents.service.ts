@@ -17,6 +17,5 @@ export class DocumentsService {
 
     getDocuments() {
         var miUrl = "https://loquesea.sharepoint.com/_api/web/GetFolderByServerRelativeUrl('Documentos%20compartidos')?$select=Author/Title,ModifiedBy/Title&$expand=Author/Title,ModifiedBy/Title,Folders,Files";
-
     }
 }

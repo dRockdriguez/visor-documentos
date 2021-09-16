@@ -3,10 +3,10 @@
     <p class="lead">Login y recuperacion de documentos de sharepoint</p>
     <div *ngIf="authenticated; then welcomeUser else signInPrompt"></div>
     <ng-template #welcomeUser>
-        <h4>Welcome {{ user != null ? user.displayName : '' }}!</h4>
-        <p>Use the navigation bar at the top of the page to get started.</p>
+        <h4>Bienvenid@ {{ user != null ? user.displayName : '' }}!</h4>
+        <p>Aquí podrás ver tus documentos de sharepoint</p>
     </ng-template>
     <ng-template #signInPrompt>
-        <button class="btn btn-primary btn-large" role="button" (click)="signIn()">Click here to sign in</button>
+        <button class="btn btn-primary btn-large" role="button" (click)="signIn()">Sign in</button>
     </ng-template>
 </div>

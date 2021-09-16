@@ -1,0 +1,65 @@
+<div class="jumbotron">
+    <h1>Escritos</h1>
+
+    <hr>
+
+    <h3>Escrito 1</h3>
+    <div class="alert alert-danger" role="alert" *ngIf="template1Errors">
+        Todos los campos son obligatorios
+    </div>
+    <form [formGroup]="template1" novalidate (ngSubmit)="submitForm1()" class="form-inline">
+        <div class="form-group mb-2 mx-sm-3 ">
+            <label class="center-block ">Destinatario:
+            <input class="form-control mx-sm-5" formControlName="destinatario">
+          </label>
+        </div>
+        <div class="form-group mb-2 mx-sm-3 ">
+            <label class="center-block ">Expediente:
+            <input class="form-control mx-sm-5" formControlName="expediente">
+          </label>
+        </div>
+        <div class="form-group mb-2 mx-sm-3 ">
+            <label class="center-block ">Solicitud:
+            <input class="form-control mx-sm-5" formControlName="solicitud">
+          </label>
+        </div>
+        <div class="form-group mb-2 mx-sm-3 ">
+            <label class="center-block ">Técnico:
+            <input class="form-control mx-sm-5 " formControlName="tecnico">
+          </label>
+        </div>
+        <div class="form-group mx-sm-3">
+            <button type="submit ">Enviar</button>
+        </div>
+    </form>
+    <hr>
+    <h3>Escrito 2</h3>
+    <div class="alert alert-danger " role="alert " *ngIf="template2Errors">
+        Todos los campos son obligatorios
+    </div>
+    <form [formGroup]="template2" novalidate (ngSubmit)="submitForm2()" class="form-inline">
+        <div class="form-group mb-2 mx-sm-3 ">
+            <label class="center-block ">Destinatario:
+            <input class="form-control mx-sm-5" formControlName="destinatario">
+          </label>
+        </div>
+        <div class="form-group mb-2 mx-sm-3 ">
+            <label class="center-block ">Expediente:
+            <input class="form-control mx-sm-5" formControlName="expediente">
+          </label>
+        </div>
+        <div class="form-group mb-2 mx-sm-3 ">
+            <label class="center-block ">Solicitud:
+            <input class="form-control mx-sm-5" formControlName="solicitud">
+          </label>
+        </div>
+        <div class="form-group mb-2 mx-sm-3 ">
+            <label class="center-block ">Técnico:
+            <input class="form-control mx-sm-5 " formControlName="tecnico">
+          </label>
+        </div>
+        <div class="form-group mx-sm-3">
+            <button type="submit ">Enviar</button>
+        </div>
+    </form>
+</div>

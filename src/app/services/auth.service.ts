@@ -13,16 +13,16 @@ import * as MicrosoftGraph from '@microsoft/microsoft-graph-types';
 })
 
 export class AuthService {
-  public authenticated: boolean;
+  public authenticated: boolean = false;
   public user?: User;
 
   constructor(
     private msalService: MsalService,
     private alertsService: AlertsService) {
-
+/*
     this.authenticated = this.msalService.instance
       .getAllAccounts().length > 0;
-    this.getUser().then((user) => { this.user = user });
+    this.getUser().then((user) => { this.user = user });*/
   }
 
   // Prompt the user to sign in and
@@ -55,7 +55,6 @@ export class AuthService {
     };
     const result = await this.msalService.acquireTokenSilent(requestObj).toPromise()
       .catch((err) => { console.log("error ") });
-
     if (result) {
       // Temporary to display token in an error box
       return result.accessToken;
@@ -72,7 +71,6 @@ export class AuthService {
       .catch((reason) => {
         this.alertsService.addError('Get token failed', JSON.stringify(reason, null, 2));
       });
-
     if (result) {
       // Temporary to display token in an error box
       return result.accessToken;
@@ -85,17 +83,12 @@ export class AuthService {
 
   private async getUser(): Promise<User | undefined> {
     if (!this.authenticated) return undefined;
-
     const graphClient = Client.init({
-      // Initialize the Graph client with an auth
-      // provider that requests the token from the
-      // auth service
       authProvider: async (done) => {
         const token = await this.getAccessToken()
           .catch((reason) => {
             done(reason, null);
           });
-
         if (token) {
           done(null, token);
         } else {
@@ -103,20 +96,15 @@ export class AuthService {
         }
       }
     });
-
     // Get the user from Graph (GET /me)
     const graphUser: MicrosoftGraph.User = await graphClient
       .api('/me')
-      .select('displayName,mail,mailboxSettings,userPrincipalName')
+      .select('displayName')
       .get();
 
     const user = new User();
     user.displayName = graphUser.displayName ?? '';
-    // Prefer the mail property, but fall back to userPrincipalName
-    user.email = graphUser.mail ?? graphUser.userPrincipalName ?? '';
-    user.timeZone = graphUser.mailboxSettings?.timeZone ?? 'UTC';
-
-    // Use default avatar
+  
     user.avatar = '/assets/no-profile-photo.png';
 
     return user;

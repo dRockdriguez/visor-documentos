@@ -1,13 +1,19 @@
 <div class="jumbotron">
-    <h1>Ficheros</h1>
+    <h1>Documentos</h1>
 
     <div>
         <span *ngIf="!files">No hay nada que ver</span>
         <ul>
-            <li *ngFor="let file of files">
-                Nombre: {{ file.name }} <a target="_blank" [href]="file.link">Editar</a>
-                <br>
-                <a [routerLink]="['/visor', file.source]">Ver</a>
+            <li *ngFor="let file of files" class="item">
+                <div class="file-name">
+                    Nombre: {{ file.name }}
+                </div>
+
+                <div class="links">
+                    <a target="_blank" class="link-document" [href]="file.link">Editar</a>
+
+                    <a class="link-document" [routerLink]="['/documents/visor', file.source, file.name]">Ver</a>
+                </div>
             </li>
         </ul>
     </div>

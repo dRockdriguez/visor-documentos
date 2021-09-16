@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
@@ -24,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DocumentsComponent } from './documents/documents.component';
 import { VisorCommponent } from './visor/visor.component';
 import { SafePipe } from './safe.pipe';
+import { FormTemplateComponent } from './form-template/form-template.component';
 
 let msalInstance: IPublicClientApplication | undefined = undefined;
 
@@ -52,7 +53,8 @@ export function MSALInstanceFactory(): IPublicClientApplication {
     AlertsComponent,
     DocumentsComponent,
     VisorCommponent,
-    SafePipe
+    SafePipe,
+    FormTemplateComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +62,8 @@ export function MSALInstanceFactory(): IPublicClientApplication {
     AppRoutingModule,
     NgbModule,
     MsalModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
     {

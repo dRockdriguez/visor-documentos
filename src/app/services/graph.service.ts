@@ -13,14 +13,14 @@ import { MsalService } from '@azure/msal-angular';
 
 export class GraphService {
 
-  private graphClient: Client;
+  //private graphClient: Client;
   constructor(
     private authService: AuthService,
     private alertsService: AlertsService,
     private http: HttpClient,
     private msalService: MsalService) {
     // Initialize the Graph client
-    this.graphClient = Client.init({
+   /* this.graphClient = Client.init({
       authProvider: async (done) => {
         // Get the token from the auth service
         const token = await this.authService.getAccessToken()
@@ -33,10 +33,10 @@ export class GraphService {
           done("Could not get an access token", null);
         }
       }
-    });
+    });*/
   }
 
-  async getDocuments() {
+  async getDocuments() { 
     this.msalService.instance
     const token = await this.authService.getToken()
     return new Promise((resolve) => {
@@ -53,7 +53,23 @@ export class GraphService {
     });
   }
 
-  async getCalendarView(start: string, end: string, timeZone: string): Promise<MicrosoftGraph.Event[] | undefined> {
+  async getTemplates() { 
+    this.msalService.instance
+    const token = await this.authService.getToken()
+    return new Promise((resolve) => {
+      this.http.get("https://loquesea.sharepoint.com/_api/web/GetFolderByServerRelativeUrl('Plantillas')?$select=Author/Title,ModifiedBy/Title&$expand=Author/Title,ModifiedBy/Title,Folders,Files"
+        , {
+          headers: new HttpHeaders({
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/json; odata=verbose'
+          })
+        }).subscribe((data) => {
+          resolve(data);
+        });
+    });
+  }
+  /*async getCalendarView(start: string, end: string, timeZone: string): Promise<MicrosoftGraph.Event[] | undefined> {
     try {
       // GET /me/calendarview?startDateTime=''&endDateTime=''
       // &$select=subject,organizer,start,end
@@ -87,5 +103,5 @@ export class GraphService {
     } catch (error) {
       throw Error(JSON.stringify(error, null, 2));
     }
-  }
+  }*/
 }
